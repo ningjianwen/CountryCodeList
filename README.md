@@ -6,3 +6,4 @@
 主要使用了**HandyJson**把从本地读取的json文件转化为数据模型数组。通过`UITableView`展示出来。
 
 效果展示如下：
+![国家列表](screenshot.png)

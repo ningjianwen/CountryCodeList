@@ -4,7 +4,7 @@
 //
 //  Created by jianwen ning on 03/05/2019.
 //  Copyright © 2019 jianwen ning. All rights reserved.
-//  显示国家信息（国家名+缩写+手机区号）
+//  显示国家信息（国家名+缩写+国际区号）
 
 import UIKit
 
@@ -26,15 +26,13 @@ class CountryTableViewCell: UITableViewCell {
         var label = UILabel.init(frame: CGRect(x:itemWidth * 2, y:5, width:itemWidth/2, height:itemHeight))
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
-//        label.textAlignment = NSTextAlignment.center
         return label
     }()
-    //手机区号
+    //国际区号
     private lazy var phoneCode:UILabel = {
         var label = UILabel.init(frame: CGRect(x:itemWidth * 2 + itemWidth/2, y:5, width:itemWidth/2, height:itemHeight))
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
-//        label.textAlignment = NSTextAlignment.right
         return label
     }()
 

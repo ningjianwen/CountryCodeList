@@ -4,7 +4,7 @@
 //
 //  Created by jianwen ning on 03/05/2019.
 //  Copyright © 2019 jianwen ning. All rights reserved.
-//  swift 学习，显示全球的国家编码列表
+//  swift 学习，显示全球的国家列表
 
 import UIKit
 
