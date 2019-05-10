@@ -26,7 +26,7 @@ class CountryTableViewCell: UITableViewCell {
         var label = UILabel.init(frame: CGRect(x:itemWidth * 2, y:5, width:itemWidth/2, height:itemHeight))
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
-        label.textAlignment = NSTextAlignment.center
+//        label.textAlignment = NSTextAlignment.center
         return label
     }()
     //手机区号
@@ -34,7 +34,7 @@ class CountryTableViewCell: UITableViewCell {
         var label = UILabel.init(frame: CGRect(x:itemWidth * 2 + itemWidth/2, y:5, width:itemWidth/2, height:itemHeight))
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
-        label.textAlignment = NSTextAlignment.right
+//        label.textAlignment = NSTextAlignment.right
         return label
     }()
 

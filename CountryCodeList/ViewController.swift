@@ -10,9 +10,9 @@ import UIKit
 import HandyJSON
 
 let cellIdentifier: String = "cellIdentifier"
-let screenWidth:CGFloat = UIScreen.main.bounds.size.width
-let screenHeight:CGFloat = UIScreen.main.bounds.size.height
-let isIphoneX:Bool = Int(screenHeight/screenWidth * 100) == 216 ? true : false //判断是否是iphoneX系列
+let screenWidth: CGFloat = UIScreen.main.bounds.size.width
+let screenHeight: CGFloat = UIScreen.main.bounds.size.height
+let isIphoneX: Bool = Int(screenHeight/screenWidth * 100) == 216 ? true : false //判断是否是iphoneX系列
 let navbarHeight:CGFloat = isIphoneX ? 88.0 : 64.0 //导航栏的高度
 
 class ViewController: UIViewController {
@@ -31,11 +31,24 @@ class ViewController: UIViewController {
         var modelList:[SectionListModel] = self.readLocalJson()
         return modelList as NSArray
     }()
+    
+    private lazy var sectionIndexs: NSMutableArray = {
+        var indexs: NSMutableArray = NSMutableArray()
+        return indexs
+        
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(self.tableview)
+        self.formatSectionIndexs()
+    }
+    //MARK: 格式化分组索引
+    func formatSectionIndexs(){
+        for sectionItem in self.modelList{
+            self.sectionIndexs.add((sectionItem as! SectionListModel).key ?? "")
+        }
     }
     
     private func readLocalJson() -> [SectionListModel]{
@@ -95,16 +108,25 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
         let sectionModel:SectionListModel = self.modelList[indexPath.section] as! SectionListModel
         let rowModel:CountryItemModel = (sectionModel.data?[indexPath.row])!
         
-        let alertVC:UIAlertController = UIAlertController.init(title: rowModel.countryCode, message: rowModel.countryName, preferredStyle: .actionSheet)
-        let phoneCodeAction = UIAlertAction.init(title: rowModel.phoneCode, style: .default) { (action) in
+        let alertVC:UIAlertController = UIAlertController(title: rowModel.countryCode, message: rowModel.countryName, preferredStyle: .actionSheet)
+        let phoneCodeAction = UIAlertAction(title: rowModel.phoneCode, style: .default) { (action) in
             
         }
-        let cancelAction = UIAlertAction.init(title: "我知道了", style: .default) { (action) in
+        let cancelAction = UIAlertAction(title: "我知道了", style: .default) { (action) in
             
         }
         alertVC.addAction(phoneCodeAction)
         alertVC.addAction(cancelAction)
         self.present(alertVC, animated: true, completion: nil)
+    }
+    //显示右侧索引
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return self.sectionIndexs as? [String]
+    }
+    //点击索引之后的响应事件
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        tableView.scrollToRow(at: NSIndexPath.init(row: 0, section: index) as IndexPath, at: .top, animated: true)
+        return index
     }
     
 }
